@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajándék Szavazás</title>
+    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Válaszd ki az ajándékot!</h1>
+    <div class="cards">
+        <div class="card" id="telefon">
+            <h2>Telefon</h2>
+        </div>
+        <div class="card" id="zokni">
+            <h2>Pár zokni</h2>
+        </div>
+        <div class="card" id="gamer_gep">
+            <h2>Gamer gép</h2>
+        </div>
+        <div class="card" id="kis_teso">
+            <h2>Kis tesó</h2>
+        </div>
+        <div class="card" id="lego">
+            <h2>Lego</h2>
+        </div>
+        <div class="card" id="motor">
+            <h2>Motor</h2>
+        </div>
+        <div class="card" id="tv">
+            <h2>Tv</h2>
+        </div>
+        <div class="card" id="auto">
+            <h2>Autó</h2>
+        </div>
+        <div class="card" id="mikro">
+            <h2>Mikro</h2>
+        </div>
+        <div class="card" id="gitar">
+            <h2>Gitár</h2>
+        </div>
+        <div class="card" id="fejhallgato">
+            <h2>Fejhallgató</h2>
+        </div>
+        <div class="card" id="laptop">
+            <h2>Laptop</h2>
+        </div>
+    </div>
+    <button class="result-button" onclick="mutatEredmeny()">Végeredmény</button>
+    <div class="eredmeny">
+        <h2>Eredmény</h2>
+        <p id="nyertes">A nyertes ajándék: <span id="eredmeny-ajandek">Még nincs eldöntve</span></p>
+    </div>
+    <div class="kep">
+        <img src="img/letöltés.jfif" alt="">
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

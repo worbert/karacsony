@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #312a2a;
+    color: #ffffffff;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-top: 20px;
+    color: #eee8e8;
+}
+
+h2 {
+    color: #fff;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.card {
+    background-color: #eb1111;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #f5f2f2;
+}
+
+.vote-button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.vote-button:hover {
+    background-color: #0056b3;
+}
+
+.eredmeny {
+    margin-top: 30px;
+}
+
+.eredmeny h2 {
+    color: #f5f3f3;
+}
+
+#eredmeny-ajandek {
+    font-weight: bold;
+    color: #007BFF;
+}
