@@ -1,63 +1,47 @@
-const szavazatok = {
-    telefon: 0,
-    zokni: 0,
-    gamer_gep: 0,
-    kis_teso: 0,
-    lego: 0,
-    motor: 0,
-    tv: 0,
-    auto: 0,
-    mikro: 0,
-    gitar: 0,
-    fejhallgato: 0,
-    laptop: 0
-};
+const ajandekok = [
+    { id: "telefon", nev: "Telefon" },
+    { id: "zokni", nev: "Pár zokni" },
+    { id: "gamer_gep", nev: "Gamer gép" },
+    { id: "kis_teso", nev: "Kis tesó" },
+    { id: "lego", nev: "LEGO" },
+    { id: "motor", nev: "Motor" },
+    { id: "tv", nev: "TV" },
+    { id: "auto", nev: "Autó" },
+    { id: "mikro", nev: "Mikro" },
+    { id: "gitar", nev: "Gitár" },
+    { id: "fejhallgato", nev: "Fejhallgató" },
+    { id: "laptop", nev: "Laptop" },
+];
 
-function randomSzavazatok() {
-    const ajandekok = Object.keys(szavazatok);
+const osszesSzavazat = 6000;
+let szavazatok = {};
 
-    for (let i = 0; i < 6000; i++) {
-        const randomAjandek = ajandekok[Math.floor(Math.random() * ajandekok.length)];
-        szavazatok[randomAjandek]++;
-    }
+function generalRandomSzavazatok() {
+    const szavazatok = {};
+    let maradekSzavazat = osszesSzavazat;
+    ajandekok.forEach((ajandek, index) => {
+        const maxSzavazat = index === ajandekok.length - 1 ? maradekSzavazat : Math.floor(Math.random() * (maradekSzavazat / 2)) + 1;
+        szavazatok[ajandek.id] = maxSzavazat;
+        maradekSzavazat -= maxSzavazat;
+    });
 
-    console.log("Szavazatok generálva:", szavazatok);
+    return szavazatok;
 }
 
-function megjelenitEredmeny() {
-    let maxSzavazat = 0;
-    let nyertes = "";
-
-    for (let ajandek in szavazatok) {
-        if (szavazatok[ajandek] > maxSzavazat) {
-            maxSzavazat = szavazatok[ajandek];
-            nyertes = ajandek;
+function frissitSzavazatokat(szavazatok) {
+    ajandekok.forEach((ajandek) => {
+        const szavazatElem = document.getElementById(`szavazat-${ajandek.id}`);
+        if (szavazatElem) {
+            szavazatElem.textContent = `Szavazatok: ${szavazatok[ajandek.id]}`;
         }
-    }
-    const eredmenyElem = document.getElementById("eredmeny-ajandek");
-    eredmenyElem.textContent = ajandekNevek(nyertes);
-}
-
-function ajandekNevek(azonosito) {
-    const nevek = {
-        telefon: "Telefon",
-        zokni: "Pár zokni",
-        gamer_gep: "Gamer gép",
-        kis_teso: "Kis tesó",
-        lego: "LEGO",
-        motor: "Motor",
-        tv: "TV",
-        auto: "Autó",
-        mikro: "Mikro",
-        gitar: "Gitár",
-        fejhallgato: "Fejhallgató",
-        laptop: "Laptop"
-    };
-    return nevek[azonosito];
+    });
 }
 
 function mutatEredmeny() {
-    megjelenitEredmeny();
+    const nyertes = Object.entries(szavazatok).reduce((max, aktualis) => aktualis[1] > max[1] ? aktualis : max);
+    const nyertesNev = ajandekok.find((ajandek) => ajandek.id === nyertes[0]).nev;
+    document.getElementById("eredmeny-ajandek").textContent = nyertesNev;
+    frissitSzavazatokat(szavazatok);
 }
 
-window.onload = randomSzavazatok;
+szavazatok = generalRandomSzavazatok();
