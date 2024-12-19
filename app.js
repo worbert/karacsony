@@ -13,35 +13,35 @@ const ajandekok = [
     { id: "laptop", nev: "Laptop" },
 ];
 
-const osszesSzavazat = 6000;
-let szavazatok = {};
+const szavazatok = {};
 
-function generalRandomSzavazatok() {
-    const szavazatok = {};
-    let maradekSzavazat = osszesSzavazat;
-    ajandekok.forEach((ajandek, index) => {
-        const maxSzavazat = index === ajandekok.length - 1 ? maradekSzavazat : Math.floor(Math.random() * (maradekSzavazat / 2)) + 1;
-        szavazatok[ajandek.id] = maxSzavazat;
-        maradekSzavazat -= maxSzavazat;
-    });
+// Kezdeti szavazatok nullázása
+ajandekok.forEach((ajandek) => {
+    szavazatok[ajandek.id] = 0;
+});
 
-    return szavazatok;
+// Szavazat hozzáadása
+function szavaz(ajandekId) {
+    szavazatok[ajandekId] += 1;
+    const szavazatElem = document.getElementById(`szavazat-${ajandekId}`);
+    if (szavazatElem) {
+        szavazatElem.textContent = `Szavazatok: ${szavazatok[ajandekId]}`;
+    }
+    frissitEredmeny();
 }
 
-function frissitSzavazatokat(szavazatok) {
-    ajandekok.forEach((ajandek) => {
-        const szavazatElem = document.getElementById(`szavazat-${ajandek.id}`);
-        if (szavazatElem) {
-            szavazatElem.textContent = `Szavazatok: ${szavazatok[ajandek.id]}`;
-        }
-    });
-}
-
-function mutatEredmeny() {
+// Nyertes ajándék megjelenítése
+function frissitEredmeny() {
     const nyertes = Object.entries(szavazatok).reduce((max, aktualis) => aktualis[1] > max[1] ? aktualis : max);
     const nyertesNev = ajandekok.find((ajandek) => ajandek.id === nyertes[0]).nev;
+
     document.getElementById("eredmeny-ajandek").textContent = nyertesNev;
-    frissitSzavazatokat(szavazatok);
 }
 
-szavazatok = generalRandomSzavazatok();
+// Események hozzáadása a szavazáshoz
+ajandekok.forEach((ajandek) => {
+    const buttonElem = document.getElementById(`button-${ajandek.id}`);
+    if (buttonElem) {
+        buttonElem.addEventListener("click", () => szavaz(ajandek.id));
+    }
+});
